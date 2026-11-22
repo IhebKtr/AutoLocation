@@ -39,7 +39,8 @@ contratRepository.deleteById(id);
 
     @Override
     public Contrat AfficherContratByID(Long id) {
-        return contratRepository.findById(id).orElse(null);
+        return contratRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Contrat not found: " + id));
     }
 
     @Override

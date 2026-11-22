@@ -39,7 +39,8 @@ public class PaiementService implements IPaiementService {
 
     @Override
     public Paiement AfficherPaiementByID(Long id) {
-        return paiementRepository.findById(id).orElse(null);
+        return paiementRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Paiement not found: " + id));
     }
 
     @Override

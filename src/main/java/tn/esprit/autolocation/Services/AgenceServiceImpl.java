@@ -38,7 +38,8 @@ agenceRepository.deleteById(id);
 
     @Override
     public Agence AfficherAgenceByID(Long id) {
-       return  agenceRepository.findById(id).orElse(null);
+       return agenceRepository.findById(id)
+               .orElseThrow(() -> new EntityNotFoundException("Agence not found: " + id));
     }
 
     @Override

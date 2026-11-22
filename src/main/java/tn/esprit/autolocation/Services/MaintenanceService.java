@@ -1,5 +1,6 @@
 package tn.esprit.autolocation.Services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.autolocation.Entities.Maintenance;
@@ -34,6 +35,7 @@ public class MaintenanceService implements IMaintenanceService {
 
     @Override
     public Maintenance afficherMaintenanceByID(Long id) {
-        return maintenanceRepository.findById(id).orElse(null);
+        return maintenanceRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Maintenance not found: " + id));
     }
 }

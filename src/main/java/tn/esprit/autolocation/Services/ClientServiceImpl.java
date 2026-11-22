@@ -1,5 +1,6 @@
 package tn.esprit.autolocation.Services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.autolocation.Entities.Client;
@@ -33,6 +34,7 @@ clientRepository.deleteById(id);
 
     @Override
     public Client AfficherClientByID(Long id) {
-        return  clientRepository.findById(id).orElse(null);
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Client not found: " + id));
     }
 }

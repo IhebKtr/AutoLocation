@@ -1,5 +1,6 @@
 package tn.esprit.autolocation.Services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.autolocation.Entities.Employe;
@@ -34,6 +35,7 @@ public class EmployeService implements IEmployeService {
 
     @Override
     public Employe afficherEmployeByID(Long id) {
-        return employeRepository.findById(id).orElse(null);
+        return employeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Employe not found: " + id));
     }
 }

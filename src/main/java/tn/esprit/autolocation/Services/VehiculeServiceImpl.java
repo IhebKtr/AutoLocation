@@ -1,5 +1,6 @@
 package tn.esprit.autolocation.Services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.autolocation.Entities.Vehicule;
@@ -34,6 +35,8 @@ VehiculeRepository vehiculeRepository ;
 
     @Override
     public Vehicule AfficherVehiculeByID(Long id) {
-        return vehiculeRepository.findById(id).orElse(null);
+        return vehiculeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Vehicule not found: " + id));
     }
+
 }

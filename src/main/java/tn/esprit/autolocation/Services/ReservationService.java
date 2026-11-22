@@ -37,7 +37,8 @@ ReservationRepository reservationRepository ;
 
     @Override
     public Reservation AfficherReservationByID(Long id) {
-        return reservationRepository.findById(id).orElse(null);
+        return reservationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Reservation not found: " + id));
     }
 
     @Override

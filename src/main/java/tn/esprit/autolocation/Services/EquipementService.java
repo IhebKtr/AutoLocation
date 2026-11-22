@@ -38,7 +38,8 @@ public class EquipementService implements IEquipementService{
 
     @Override
     public Equipement AfficherEquipementByID(Long id) {
-        return equipementRepository.findById(id).orElse(null);
+        return equipementRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Equipement not found: " + id));
     }
 
     @Override
